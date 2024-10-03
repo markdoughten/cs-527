@@ -15,6 +15,7 @@ Table meta_item_subcategories {
   category_id int
   subcategory_name varchar
 }
+Ref: meta_item_subcategories.category_id > meta_item_categories.id
 
 Table meta_item_attributes {
   id int [primary key]
@@ -75,14 +76,14 @@ Table user_questions {
   reply_text varchar
   is_open bool
 }
-Ref: user_questions.auction_id > auctions.id  // New reference to auctions
+Ref: user_questions.auction_id > auctions.id
 Ref: user_questions.asker_id > users.id
 Ref: user_questions.replier_id > users.id
 
 Table alerts {
   id int [primary key]
-  item_id int  // New reference to items table
+  item_id int  // References items.id
   user_id int
 }
 Ref: alerts.user_id > users.id
-Ref: alerts.item_id > items.id  // New reference to items table
+Ref: alerts.item_id > items.id
