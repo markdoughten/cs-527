@@ -50,12 +50,10 @@ Table auctions {
   min_price real
   opening_time timestamp
   closing_time timestamp
-  status enum('Open', 'Sold', 'Expired')  // Enum to represent auction status
-  winning_bid_id int  // References bids.id for the winning bid
+  status enum('Open', 'Sold', 'Expired')
 }
 Ref: auctions.item_id > items.id
 Ref: auctions.seller_id > users.id
-Ref: auctions.winning_bid_id > bids.id
 
 Table bids {
   id int [primary key]
