@@ -2,7 +2,7 @@ Table users {
   id int [primary key]
   email varchar
   password varchar
-  role varchar
+  role enum('admin','staff','user')
 }
 
 Table meta_item_categories {
@@ -34,7 +34,7 @@ Ref: items.category_id > meta_item_categories.id
 Ref: items.subcategory_id > meta_item_subcategories.id
 
 Table item_attributes {
-  item_id int 
+  item_id int
   attribute_id int
   attribute_value varchar
 }
@@ -71,12 +71,19 @@ Table user_questions {
   asker_id int
   replier_id int
   question_text varchar
-  reply_text varchar
   is_open bool
 }
 Ref: user_questions.auction_id > auctions.id
 Ref: user_questions.asker_id > users.id
-Ref: user_questions.replier_id > users.id
+
+Table user_answers {
+  id int [primary key]
+  question_id int
+  replier_id int
+  reply_text varchar
+}
+Ref: user_answers.question_id > user_questions.id
+Ref: user_answers.replier_id > users.id
 
 Table alerts {
   id int [primary key]
